@@ -1,0 +1,43 @@
+{
+  "name": "Achievement",
+  "type": "object",
+  "properties": {
+    "title": {
+      "type": "string"
+    },
+    "description": {
+      "type": "string"
+    },
+    "icon": {
+      "type": "string"
+    },
+    "category": {
+      "type": "string",
+      "enum": [
+        "distance",
+        "coins",
+        "streak",
+        "exploration",
+        "social",
+        "special"
+      ]
+    },
+    "requirement_value": {
+      "type": "number"
+    },
+    "requirement_unit": {
+      "type": "string"
+    },
+    "coin_reward": {
+      "type": "number",
+      "default": 0
+    },
+    "badge_color": {
+      "type": "string"
+    }
+  },
+  "required": [
+    "title",
+    "category"
+  ]
+}

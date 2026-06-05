@@ -1,0 +1,52 @@
+{
+  "name": "Mission",
+  "type": "object",
+  "properties": {
+    "title": {
+      "type": "string"
+    },
+    "description": {
+      "type": "string"
+    },
+    "type": {
+      "type": "string",
+      "enum": [
+        "daily",
+        "weekly",
+        "special"
+      ]
+    },
+    "target_value": {
+      "type": "number"
+    },
+    "target_unit": {
+      "type": "string",
+      "enum": [
+        "km",
+        "calories",
+        "routes",
+        "coins"
+      ]
+    },
+    "coin_reward": {
+      "type": "number"
+    },
+    "icon": {
+      "type": "string"
+    },
+    "is_premium": {
+      "type": "boolean",
+      "default": false
+    },
+    "is_active": {
+      "type": "boolean",
+      "default": true
+    }
+  },
+  "required": [
+    "title",
+    "type",
+    "target_value",
+    "coin_reward"
+  ]
+}

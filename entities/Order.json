@@ -1,0 +1,30 @@
+{
+  "name": "Order",
+  "type": "object",
+  "properties": {
+    "item_id": {
+      "type": "string"
+    },
+    "item_name": {
+      "type": "string"
+    },
+    "coins_spent": {
+      "type": "number"
+    },
+    "status": {
+      "type": "string",
+      "enum": [
+        "pending",
+        "confirmed",
+        "delivered",
+        "cancelled"
+      ],
+      "default": "pending"
+    }
+  },
+  "required": [
+    "item_id",
+    "item_name",
+    "coins_spent"
+  ]
+}

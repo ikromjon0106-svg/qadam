@@ -1,0 +1,28 @@
+{
+  "name": "UserMission",
+  "type": "object",
+  "properties": {
+    "mission_id": {
+      "type": "string"
+    },
+    "progress": {
+      "type": "number",
+      "default": 0
+    },
+    "is_completed": {
+      "type": "boolean",
+      "default": false
+    },
+    "completed_at": {
+      "type": "string",
+      "format": "date-time"
+    },
+    "coins_claimed": {
+      "type": "boolean",
+      "default": false
+    }
+  },
+  "required": [
+    "mission_id"
+  ]
+}

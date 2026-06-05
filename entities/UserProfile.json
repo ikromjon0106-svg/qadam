@@ -1,0 +1,104 @@
+{
+  "name": "UserProfile",
+  "type": "object",
+  "properties": {
+    "display_name": {
+      "type": "string",
+      "description": "Foydalanuvchi nomi"
+    },
+    "avatar_url": {
+      "type": "string",
+      "description": "Profil rasmi"
+    },
+    "total_distance_km": {
+      "type": "number",
+      "default": 0,
+      "description": "Jami masofa (km)"
+    },
+    "total_coins": {
+      "type": "number",
+      "default": 0,
+      "description": "Jami tangalar"
+    },
+    "total_calories": {
+      "type": "number",
+      "default": 0,
+      "description": "Jami kaloriya"
+    },
+    "total_time_minutes": {
+      "type": "number",
+      "default": 0,
+      "description": "Jami vaqt (daqiqa)"
+    },
+    "height_cm": {
+      "type": "number",
+      "description": "Bo'yi (sm)"
+    },
+    "weight_kg": {
+      "type": "number",
+      "description": "Vazni (kg)"
+    },
+    "subscription_type": {
+      "type": "string",
+      "enum": [
+        "free",
+        "premium"
+      ],
+      "default": "free"
+    },
+    "section_id": {
+      "type": "number",
+      "description": "Guruh raqami (har 1000 foydalanuvchi)"
+    },
+    "referral_code": {
+      "type": "string",
+      "description": "Taklif kodi"
+    },
+    "referred_by": {
+      "type": "string",
+      "description": "Kim taklif qilgan"
+    },
+    "referral_count": {
+      "type": "number",
+      "default": 0
+    },
+    "is_shielded": {
+      "type": "boolean",
+      "default": false
+    },
+    "shield_expires": {
+      "type": "string",
+      "format": "date-time"
+    },
+    "is_flagged": {
+      "type": "boolean",
+      "default": false
+    },
+    "flag_reason": {
+      "type": "string"
+    },
+    "daily_steps": {
+      "type": "number",
+      "default": 0
+    },
+    "weekly_distance_km": {
+      "type": "number",
+      "default": 0
+    },
+    "monthly_distance_km": {
+      "type": "number",
+      "default": 0
+    },
+    "streak_days": {
+      "type": "number",
+      "default": 0
+    },
+    "level": {
+      "type": "number",
+      "default": 1
+    }
+  },
+  "required": [
+    "display_name"
+  ]
+}

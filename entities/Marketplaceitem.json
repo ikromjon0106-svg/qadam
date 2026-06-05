@@ -1,0 +1,58 @@
+{
+  "name": "MarketplaceItem",
+  "type": "object",
+  "properties": {
+    "name": {
+      "type": "string"
+    },
+    "description": {
+      "type": "string"
+    },
+    "image_url": {
+      "type": "string"
+    },
+    "coin_price": {
+      "type": "number"
+    },
+    "category": {
+      "type": "string",
+      "enum": [
+        "sports",
+        "coupons",
+        "accessories",
+        "sponsor",
+        "vouchers",
+        "powerups"
+      ]
+    },
+    "item_type": {
+      "type": "string",
+      "enum": [
+        "regular",
+        "bomb",
+        "shield"
+      ],
+      "default": "regular"
+    },
+    "stock": {
+      "type": "number",
+      "default": 0
+    },
+    "is_premium_only": {
+      "type": "boolean",
+      "default": false
+    },
+    "is_active": {
+      "type": "boolean",
+      "default": true
+    },
+    "sponsor_name": {
+      "type": "string"
+    }
+  },
+  "required": [
+    "name",
+    "coin_price",
+    "category"
+  ]
+}

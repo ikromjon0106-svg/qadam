@@ -1,0 +1,42 @@
+{
+  "name": "Competition",
+  "type": "object",
+  "properties": {
+    "title": {
+      "type": "string"
+    },
+    "description": {
+      "type": "string"
+    },
+    "type": {
+      "type": "string",
+      "enum": [
+        "section",
+        "global",
+        "premium"
+      ]
+    },
+    "start_date": {
+      "type": "string",
+      "format": "date"
+    },
+    "end_date": {
+      "type": "string",
+      "format": "date"
+    },
+    "prize_pool": {
+      "type": "string"
+    },
+    "is_active": {
+      "type": "boolean",
+      "default": true
+    },
+    "section_id": {
+      "type": "number"
+    }
+  },
+  "required": [
+    "title",
+    "type"
+  ]
+}

@@ -1,0 +1,16 @@
+{
+  "name": "UserAchievement",
+  "type": "object",
+  "properties": {
+    "achievement_id": {
+      "type": "string"
+    },
+    "unlocked_at": {
+      "type": "string",
+      "format": "date-time"
+    }
+  },
+  "required": [
+    "achievement_id"
+  ]
+}

@@ -1,0 +1,39 @@
+{
+  "name": "Bomb",
+  "type": "object",
+  "properties": {
+    "lat": {
+      "type": "number"
+    },
+    "lng": {
+      "type": "number"
+    },
+    "radius_meters": {
+      "type": "number",
+      "default": 100
+    },
+    "coin_cost": {
+      "type": "number",
+      "default": 50
+    },
+    "penalty_coins": {
+      "type": "number",
+      "default": 10
+    },
+    "placed_by_name": {
+      "type": "string"
+    },
+    "is_active": {
+      "type": "boolean",
+      "default": true
+    },
+    "expires_at": {
+      "type": "string",
+      "format": "date-time"
+    }
+  },
+  "required": [
+    "lat",
+    "lng"
+  ]
+}

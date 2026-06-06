@@ -1,132 +1,140 @@
-# 🏃‍♂️ Qadam 
+# 🏃‍♂️ Qadam
+
+
 
 ![React](https://img.shields.io/badge/React-18.2.0-blue?style=for-the-badge&logo=react)
-![Vite](https://img.shields.io/badge/Vite-6.1.0-646CFF?style=for-the-badge&logo=vite)
-![Tailwind CSS](https://img.shields.io/badge/Tailwind_CSS-3.4.17-38B2AC?style=for-the-badge&logo=tailwind-css)
-![Supabase](https://img.shields.io/badge/Supabase-Database-3ECF8E?style=for-the-badge&logo=supabase)
-![Base44](https://img.shields.io/badge/Base44-SDK_Integrated-black?style=for-the-badge)
 
-**Qadam** is an innovative mobile Move-to-Earn (M2E) Web platform with gamification elements. The application motivates users to move more by converting their steps into digital coins. The project combines fitness tracking with unique tactical game mechanics: planting virtual bombs on the map, using shields to protect your balance, completing missions, and trading on the internal marketplace.
+![Vite](https://img.shields.io/badge/Vite-6.1.0-646CFF?style=for-the-badge&logo=vite)
+
+![Tailwind CSS](https://img.shields.io/badge/Tailwind_CSS-3.4.17-38B2AC?style=for-the-badge&logo=tailwind-css)
+
+![Base44 BaaS](https://img.shields.io/badge/Base44-Full_Backend_&_Hosting-orange?style=for-the-badge)
+
+
+
+**Qadam** is an innovative mobile Move-to-Earn (M2E) Web application built with deep gamification elements. The platform motivates users to stay active by converting physical steps into digital currency (Q-Coins).
+
+
+
+The project seamlessly combines fitness tracking with tactical gaming mechanics: planting virtual bombs on the map, equipping shields to protect your coin balance, completing dynamic missions, and trading on the internal marketplace.
+
+
 
 ---
+
+
+
+## 🏗️ Platform Architecture (Powered by Base44)
+
+
+
+The entire server-side infrastructure and deployment of the project are built natively on top of the **Base44** ecosystem. The application operates entirely as a Backend-as-a-Service (BaaS) solution:
+
+
+
+* **Full Backend-as-a-Service (BaaS):** Database schemas, entity relationships, security controls, and built-in AI modules are configured and managed directly within the Base44 workspace.
+
+* **Hosting & Cloud Infrastructure:** The application is fully deployed, optimized, and hosted inside the Base44 cloud architecture.
+
+* **Authentication & Guardrails:** User registration, active sessions, and protected route access are handled via an isolated frontend `AuthContext` tightly integrated with the `@base44/sdk`.
+
+
+
+---
+
+
 
 ## 🛠 Tech Stack
 
+
+
 ### Frontend
-*   **Core:** React 18, Vite (with `@base44/vite-plugin`)
-*   **Routing:** React Router DOM v6
-*   **State Management & Caching:** TanStack React Query v5, React Context API
-*   **Styling & UI:** Tailwind CSS, Radix UI (Headless UI), Framer Motion (animations)
-*   **Maps & Geolocation:** React-Leaflet v4 (integration of interactive maps for bomb and route mechanics)
-*   **Forms & Validation:** React Hook Form + Zod
-*   **Charts:** Recharts
 
-### Backend Infrastructure
-*   **Database:** Supabase (PostgreSQL)
-*   **BaaS / SDK:** Base44 SDK (`@base44/sdk`) — authentication, sessions, and server-side functions management
-*   **Authentication:** Isolated `AuthContext`, proxying requests to `/api/apps/public` via Vite configuration
+* **Core:** React 18, Vite (integrated with `@base44/vite-plugin`)
 
----
+* **Routing:** React Router DOM v6 (routes secured via a specialized `ProtectedRoute` wrapper)
 
-## 🏗 Architecture and Data Logic
+* **Data Management:** TanStack React Query v5 (server-state caching and synchronization) + React Context API
 
-The application is built using a modular architecture with a clear separation of logic (Hooks/API) and presentation (Components/Pages). Routing is protected by the `ProtectedRoute` component, which is seamlessly integrated with `base44.auth.me()` for session verification.
+* **UI & Design System:** Tailwind CSS, Radix UI (Headless primitives), Framer Motion (fluid mobile animations)
 
-### Core Entities and Data Schemas
+* **Maps & Geolocation:** React-Leaflet v4 (interactive maps for rendering routes and live bomb detonation zones)
 
-1.  **`UserProfile`**
-    *   Stores user statistics, current coin balance (Q-Coins), level, and active equipped items (e.g., shields).
-    *   Linked to Base44 SDK authentication.
-2.  **`Activity` (Route)**
-    *   Records walking or running sessions.
-    *   **Data:** Route coordinates are stored in `JSONB` format (GeoJSON LineString) for rendering the track on the map using `React-Leaflet`. It also includes metrics: time, distance, average speed, and earned coins.
-3.  **`Bomb` & `Shield` (Tactical Elements)**
-    *   `Bomb`: Objects on the map (`MapTracking`) that have `lat/lng` coordinates, a blast radius, and a timer. If another user enters the blast radius without a shield, they lose a portion of their earned coins.
-    *   `Shield`: An inventory item providing temporary or one-time immunity from bombs.
-4.  **`Mission`**
-    *   Daily and weekly tasks (e.g., "Walk 10,000 steps", "Plant 2 bombs").
-    *   Have statuses: `locked`, `in_progress`, `completed`, `claimed`.
-5.  **`Achievement`**
-    *   Global rewards for long-term goals. Linked to the profile table (1-to-Many relation).
+* **Forms & Validation:** React Hook Form + Zod
+
+* **Data Visualizations:** Recharts
+
+
+
+### Backend Infrastructure (Base44 Cloud)
+
+* **Base44 SDK (`@base44/sdk`):** Connects the client interface using a unique `appId` and secure `api_key` to execute direct cloud mutations, analytics, and authentication actions.
+
+* **API Proxying:** Local `/api` requests are automatically routed via Vite configuration to the active Base44 endpoint to bypass CORS restrictions during development.
+
+
 
 ---
 
-## 🚀 Local Setup
+
+
+## 📊 Base44 Data Structure
+
+
+
+The project database relies on strict JSON schemas and managed tables deployed on the Base44 platform:
+
+
+
+1. **`UserProfile`**
+
+   * Manages user profiles, historical stats, level progression, coin balance (Q-Coins), and active inventory components (e.g., active protection shields). Directly tied to Base44 SDK Auth.
+
+2. **`Activity`**
+
+   * Stores physical workout data (walking/running logs). Route paths are recorded in a specialized `JSONB` array of geospatial points (`lat`, `lng`) to cleanly draw lines on the map using `React-Leaflet`.
+
+3. **`Bomb`**
+
+   * Tactical gaming entities deployed onto the interactive map. They contain setup coordinates, explosion radius parameters, placement costs, and coin deduction penalties. Passing players lose coins unless protected.
+
+4. **`Mission`**
+
+   * Daily and weekly targets containing dynamic states (`locked`, `in_progress`, `completed`, `claimed`).
+
+5. **`Achievement`**
+
+   * Global milestone achievements linked directly to the player profile (featuring customizable `badge_color` parameters).
+
+
+
+---
+
+
+
+## 🚀 Local Deployment
+
+
 
 ### 1. Prerequisites
-*   Node.js (v18 or higher)
-*   npm (v9 or higher)
 
-### 2. Clone and install dependencies
-```bash
-git clone <your-repository>
-cd qadam
-npm install
-```
+Ensure you have the following packages installed locally:
 
-### 3. Environment Variables
-Create an `.env` file in the root directory of the project and add the following keys, which are necessary for the Base44 SDK to function correctly and for request proxying:
+* **Node.js** (v18 or higher)
 
-```env
-VITE_BASE44_APP_BASE_URL=https://api.base44.io
-VITE_BASE44_APP_ID=6a2270f9b1e691bc8ab87bf6
-VITE_BASE44_API_KEY=e61be199655e4b4082a21d46745b077d
-# If using a specific functions version
-VITE_BASE44_FUNCTIONS_VERSION=v1 
-```
-
-> **Important:** `vite.config.js` is configured to proxy the local `/api` to `VITE_BASE44_APP_BASE_URL` to bypass CORS restrictions during development.
-
-### 4. Run the development server
-```bash
-npm run dev
-```
-The application will be available at `http://localhost:5173`.
-
----
-
-## 📦 NPM Scripts
-
-The following commands are configured in `package.json`:
-
-*   `npm run dev` — Starts the local development server with HMR (Hot Module Replacement).
-*   `npm run build` — Creates an optimized production build in the `dist` folder.
-*   `npm run preview` — Locally previews the built production version.
-*   `npm run lint` — Runs code linting using ESLint.
-*   `npm run lint:fix` — Automatically fixes code-style errors.
-*   `npm run typecheck` — Checks TypeScript types (via `jsconfig.json`).
-
----
-
-## 📂 Project Structure
-
-```text
-qadam/
-├── public/                 # Static assets
-├── src/
-│   ├── api/                # API initialization and clients (base44Client.js)
-│   ├── components/         # Reusable UI components (Radix UI + Tailwind)
-│   │   ├── layout/         # Page layouts (MobileLayout)
-│   │   └── ui/             # Basic atomic elements
-│   ├── hooks/              # Custom React Hooks
-│   ├── lib/                # Utilities, Contexts (AuthContext), and settings (app-params)
-│   ├── pages/              # Main application screens (MapTracking, Dashboard, etc.)
-│   ├── utils/              # Helper formatting functions
-│   ├── App.jsx             # Root component with routing
-│   ├── index.css           # Global styles and Tailwind theme variables
-│   └── main.jsx            # React entry point
-├── .env                    # Environment variables
-├── package.json            # Dependencies and scripts
-├── tailwind.config.js      # Tailwind design system configuration
-└── vite.config.js          # Bundler and proxy settings
-```
-
----
+* **npm** (v9 or higher)
 
 ## 👨‍💻 Developers
 
+
+
 *   **This application was written by team 'B2'**
+
 *   *Project "Qadam"*
 
+
+
 ---
+
 *Developed with modern web standards and passion for a healthy lifestyle.*
+
